@@ -1,6 +1,4 @@
-file1 = open('source1.txt', 'r')
-count = 0
-line = file1.readline()
-print(type(int(line)))
-
-no_of_entries=int(line)
+with open ('source1.txt', 'r') as f:  # Open lorem.txt for reading text
+    contents = f.read()              # Read the entire file to a string
+contents = contents.split('\n\n')
+print(contents[0])                           # Print the string

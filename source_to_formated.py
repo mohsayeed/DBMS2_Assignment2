@@ -1,6 +1,6 @@
 import re
 newline=''
-with open("source.txt", 'r') as f:
+with open("source1.txt", 'r') as f:
     for line in f:
         if line.strip().startswith("#*"):
             se=re.search("#\*(.*)\\n",line).group(1)
@@ -27,11 +27,11 @@ with open("formated.txt","w") as f:
 
 # from email import header
 # from os import sep
-import pandas as pd
+# import pandas as pd
 
-read_file=pd.read_csv("/home/gnaneswar/Desktop/formated.txt", sep=":",header=None)
-read_file.columns=['title', 'authors', 'year','index','references','abstract']
-read_file.to_csv("/home/gnaneswar/Desktop/formated.csv",index=None)
+# read_file=pd.read_csv("/home/gnaneswar/Desktop/formated.txt", sep=":",header=None)
+# read_file.columns=['title', 'authors', 'year','index','references','abstract']
+# read_file.to_csv("/home/gnaneswar/Desktop/formated.csv",index=None)
 
 
 # import re

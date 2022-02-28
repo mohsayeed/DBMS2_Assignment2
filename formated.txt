@@ -1,4 +1,0 @@
-
-Automated Deduction in Geometry: 5th International Workshop, ADG 2004, Gainesville, FL, USA, September 16-18, 2004, Revised Papers (Lecture Notes in Computer ... / Lecture Notes in Artificial Intelligence),Hoon Hong,Dongming Wang,2006,,0
-A+ Certification Core Hardware (Text & Lab Manual),Charles J. Brooks,2003,,1
-Performance engineering in industry: current practices and adoption challenges,Ahmed E. Hassan,Parminder Flora,2007,Proceedings of the 6th international workshop on Software and performance,2,This panel session discusses performance engineering practices in industry. Presentations in the session will explore the use of lightweight techniques and approaches in order to permit the cost effective and rapid adoption of performance modeling research by large industrial software systems.

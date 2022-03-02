@@ -94,9 +94,10 @@ def contents_tsv(contents):
                     if(y[2:]):
                         treferenceslist['id'] = index_crecord
                         treferenceslist['referenceid'] = int(y[2:])
-                        res = list(map(treferenceslist.get, hreferenceslist))
-                        wreferenceslist.writerow(res)
-                        treferenceslist = dreferenceslist
+                        if(treferenceslist['referenceid']!=tpapers['id']):
+                            res = list(map(treferenceslist.get, hreferenceslist))
+                            wreferenceslist.writerow(res)
+                            treferenceslist = dreferenceslist
                 elif(y.startswith('#@')):
                     if(y[2:]):
                         list_authors = y[2:].split(',')

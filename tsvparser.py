@@ -55,29 +55,14 @@ def contents_tsv(contents):
         y = dreferenceslist.setdefault(x)
 
     for x in contents:
-        if x!=contents[numb_entries_new]:
-
-            tpapers = {}
-            tyear = {}
-            tvenue = {}
-            tmainauthor = {}
-            tcoauthor = {}
-            treferenceslist = {}
-
-            for z in hpapers:
-                y = tpapers.setdefault(z)
-            for z in hyear:
-                y = tyear.setdefault(z)
-            for z in dvenue:
-                y = tvenue.setdefault(z)
-            for z in hmainauthor:
-                y = tmainauthor.setdefault(z)
-            for z in hcoauthor:
-                y = tcoauthor.setdefault(z)
-            for z in hreferenceslist:
-                y = treferenceslist.setdefault(z)
-
-            temp_coauthor_dict = []
+        if x!=contents[numb_entries_new-1]:
+            tpapers = dpapers
+            tyear = dyear
+            tvenue = dvenue
+            tmainauthor = dmainauthor
+            tcoauthor = dcoauthor
+            treferenceslist = dreferenceslist
+            list_coauthors = []
             x_lines = x.split('\n')
             index_crecord = 0
             for y in x_lines:
@@ -98,7 +83,7 @@ def contents_tsv(contents):
                         s=s.replace("\\","\\\\")
                         tpapers['abstract'] = s
                     else:
-                        tpapers['abstract']="This is a paper with a title "+tpapers['title']+" generated in the year "+str(tyear['year'])+" by the main author "+tmainauthor['mainauthor']+". This is auto-generated.***************"
+                        tpapers['abstract'] = "This is a paper of ID "+str(tpapers['id'])+" with the main concept on "+tpapers['title']
                 elif(y.startswith('#t')):
                     if(y[2:]):
                         tyear['year'] = int(y[2:])
@@ -118,20 +103,26 @@ def contents_tsv(contents):
                         tmainauthor['mainauthor'] = list_authors[0]
                         for la in range(1,len(list_authors)):
                             if(list_authors[la]):
-                                tcoauthor['coauthor'] = list_authors[la]
-                                temp_coauthor_dict.append(tcoauthor)
-                                tcoauthor = dcoauthor
-            for tt in temp_coauthor_dict:
-                tt['id'] = index_crecord
-                wcoauthor.writerow(list(map(tt.get,hcoauthor)))
+                                list_coauthors.append(list_authors[la])
+            for tt in list_coauthors:
+                temp =  {}
+                temp['id'] = index_crecord
+                temp['coauthor'] = tt
+                wcoauthor.writerow(list(map(temp.get,hcoauthor)))
             tyear['id'] = index_crecord
             tvenue['id'] = index_crecord
             tmainauthor['id'] = index_crecord
-            if (tpapers['abstract']==None):
-                tpapers['abstract']="This is a paper with a title "+tpapers['title']+" written by the main author "+tmainauthor['mainauthor']+". This is auto-generated.***************"
             # print(list(map(tpapers.get, hpapers)))
+            if(tpapers['abstract']==None):
+                tpapers['abstract'] = "This is a paper of ID "+str(tpapers['id'])+" with the main concept on "+tpapers['title']
             wpapers.writerow(list(map(tpapers.get, hpapers)))
             wmainauthor.writerow(list(map(tmainauthor.get, hmainauthor)))
             wyear.writerow(list(map(tyear.get, hyear)))
             wvenue.writerow(list(map(tvenue.get, hvenue)))
+            tyear['year'] = None
+            tvenue['venue'] = None
+            tpapers['abstract']=None
+            tcoauthor['coauthor']=None
+            tmainauthor['mainauthor']=None
+            treferenceslist['referenceid'] = None
 contents_tsv(contents)
